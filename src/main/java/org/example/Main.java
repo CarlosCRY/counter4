@@ -6,20 +6,35 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
+        Scanner scr = new Scanner (System.in);
         long startTime = System.nanoTime();
         List<Thread> threads = new LinkedList<>();
 
         System.out.println("¿Cantidad de contadores?");
-        int cAmmount = 0;
-        System.out.printf("Hello and welcome!");
+        int cAmount = scr.nextInt();
+        scr.nextLine();
+        System.out.println("¿Cantidad de vueltas?");
+        int lAmount = scr.nextInt();
+        scr.nextLine();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        for (int i = 0; i < cAmount; i++) {
+            Thread t = new Thread(new Counter("Contador - " + (i + 1), lAmount));
+            threads.add(t);
+            t.start();
         }
+
+        for (Thread thread: threads){
+            thread.join();
+        }
+
+        System.out.println("Fin de la operación");
+
+        long endTime = System.nanoTime();
+
+        System.out.println("Duración de la operación: " + (endTime - startTime) / 1000);
     }
 }

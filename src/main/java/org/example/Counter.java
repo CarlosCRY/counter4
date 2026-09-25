@@ -15,7 +15,7 @@ public class Counter implements Runnable {
     public void run() {
         Random wait = new Random();
         for (int i = 0; i < numVueltas; i++){
-            System.out.println("Contador " + name + " - Vuelta: " + i + 1);
+            System.out.println("Contador " + name + " - Vuelta: " + (i + 1));
             try {
                 Thread.sleep(wait.nextInt(100,500));
             } catch (InterruptedException e) {
