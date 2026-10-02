@@ -15,12 +15,13 @@ public class Turtle implements Runnable {
     public void run() {
         Random wait = new Random();
         for (int i = 0; i < numPasos; i++){
-            System.out.println("Contador " + name + " - Vuelta: " + (i + 1));
+            System.out.println(name + " ha dado " + (i + 1) + " pasos.");
             try {
                 Thread.sleep(wait.nextInt(50,200));
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
+        System.out.println("¡" + name + " ha llegado a la meta!");
     }
 }

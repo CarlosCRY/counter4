@@ -4,21 +4,27 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 public class MainTR {
-    public static void main (String[] args){
+    public static void main (String[] args)  throws InterruptedException {
+        final String[] TNAMES = {"Leonardo", "Rafael", "Michelangelo", "Donatelo", "Tiziano", "Sandro"};
         Scanner scr = new Scanner (System.in);
 
         System.out.println("¿Cantidad de tortugas?");
-        int cAmount = scr.nextInt();
+        int tAmount = scr.nextInt();
         scr.nextLine();
         System.out.println("¿Cantidad de pasos?");
-        int lAmount = scr.nextInt();
+        int sAmount = scr.nextInt();
         scr.nextLine();
 
         List<Thread> threads = new LinkedList<>();
         long startTime = System.nanoTime();
 
-        for (int i = 0; i < cAmount; i++) {
-            Thread t = new Thread(new Counter("Contador - " + (i + 1), lAmount));
+        for (int i = 0; i < tAmount; i++) {
+            Thread t;
+            if (i < 6) {
+                t = new Thread(new Turtle(TNAMES[i], sAmount));
+            } else {
+                t = new Thread(new Turtle("Tortuga " + (i + 1), sAmount));
+            }
             threads.add(t);
             t.start();
         }
@@ -27,11 +33,10 @@ public class MainTR {
             thread.join();
         }
 
-        System.out.println("Fin de la operación");
+        System.out.println("Carrera terminada");
 
         long endTime = System.nanoTime();
 
         System.out.println("Duración de la operación: " + (endTime - startTime) / 1000);
-    }
     }
 }
