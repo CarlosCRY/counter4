@@ -1,13 +1,13 @@
 package org.example;
 
 public class Account {
-    private int saldo = 0;
+    private int balance = 0;
 
-    public void ingresar(int cantidad) {
-        saldo = saldo + cantidad;
+    public void deposit(int amount) {
+        balance = balance + amount;
     }
 
-    public int getSaldo() {
-        return saldo;
+    public int getBalance() {
+        return balance;
     }
 }
